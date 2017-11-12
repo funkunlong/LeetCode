@@ -43,23 +43,31 @@ using namespace std;
 class Solution {
 public:
 	string convert(string s, int numRows) {
-		if (numRows == 1)return s;
-		int len = s.size(), k = 0, interval = (numRows << 1) - 2;
-		string res(len, ' ');
-		for (int j = 0; j < len; j += interval)
-			res[k++] = s[j];
+		string new_s;
+		int len = s.size();
+		for (int i = 0; i < len; i += 2 * numRows - 2)
+			//printf("%c", s[i]);
+			new_s.push_back(s[i]);
+
+
 		for (int i = 1; i < numRows - 1; i++)
 		{
-			int inter = (i << 1);
-			for (int j = i; j < len; j += inter)
+			for (int j = i; j < len; j += 2 * numRows - 2)
 			{
-				res[k++] = s[j];
-				inter = interval - inter;//这样写确实很漂亮
+				//printf("%c", s[j]);
+				new_s.push_back(s[j]);
+				int n = j + 2 * numRows - 2 * i - 2;
+				if (n < len)
+					//printf("%c", s[n]);
+					new_s.push_back(s[n]);
 			}
 		}
-		for (int j = numRows - 1; j < len; j += interval)
-			res[k++] = s[j];
-		return res;
+		for (int i = numRows - 1; i < len; i += 2 * numRows - 2)
+		{
+			//printf("%c", s[i]);
+			new_s.push_back(s[i]);
+		}
+		return new_s;
 	}
 };
 int main()
