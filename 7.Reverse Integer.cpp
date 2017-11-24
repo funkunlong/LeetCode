@@ -77,31 +77,48 @@
 
 //以上代码依然是不可行的，会越vector的界
 
-#include<iostream>
-#include<vector>
-#include<algorithm>
-#include<string>
-using namespace std;
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//#include<string>
+//using namespace std;
+//
+//#define int_num (-2147483647-1)
+//
+//class Solution {
+//public:
+//	int reverse(int x) {
+//		string s = to_string(x);
+//		if (s[0] == '-')
+//			std::reverse(s.begin() + 1, s.end());
+//		else
+//			std::reverse(s.begin(), s.end());
+//		long long int temp = stoll(s);
+//		if (temp > 2147483647 || temp < int_num)
+//			return 0;
+//		return (int)temp;
+//	}
+//};
+//int main()
+//{
+//	Solution s;
+//	cout << s.reverse(1563847412) << endl;
+//	return 0;
+//}
 
-#define int_num (-2147483647-1)
 
+//以上代码虽然可以通过，但是不够优秀
 class Solution {
 public:
 	int reverse(int x) {
-		string s = to_string(x);
-		if (s[0] == '-')
-			std::reverse(s.begin() + 1, s.end());
-		else
-			std::reverse(s.begin(), s.end());
-		long long int temp = stoll(s);
-		if (temp > 2147483647 || temp < int_num)
-			return 0;
-		return (int)temp;
+		int flag = (x < 0) ? -1: 1;
+		long long res = 0;
+		x = abs(x);
+		while (x != 0) {
+			res = 10 * res + x % 10;
+			x /= 10;
+		}
+		res *= flag;
+		return (res > 2147483647 || res < -2147483648) ? 0 : res;
 	}
 };
-int main()
-{
-	Solution s;
-	cout << s.reverse(1563847412) << endl;
-	return 0;
-}
