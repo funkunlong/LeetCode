@@ -8,7 +8,7 @@ class Solution {
 public:
 	vector<string>result;
 	vector<string> generateParenthesis(int n) {
-		//讲道理可以用递归实现所有的组合
+		//可以用递归实现所有的组合
 		int left = n, right = n;
 		string s = "";
 		generateleft(s,left-1, right);
